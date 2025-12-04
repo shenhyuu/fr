@@ -270,7 +270,7 @@ ai_act_logic(detective) :-
     location(detective,Room),
     (body(Room,_) -> resolve_meeting ; true),
     cooldown(detective,inspect,CD),
-    (CD =:= 0, findall(T, (location(T,Room), alive(T), T \= detective, \+ inspected(T)), Targets), Targets \= [] ->
+    (CD =:= 0, body(Room,_), findall(T, (location(T,Room), alive(T), T \= detective, \+ inspected(T)), Targets), Targets \= [] ->
         Targets = [Target|_],
         inspect_identity(Target)
     ; execute_plan_step(detective)).
@@ -346,7 +346,7 @@ ai_single_vote(AI) :-
     format('~w votes for ~w.~n',[AI,Vote]).
 
 most_suspicious(Vote) :-
-    (body(_,_) -> Vote = player ; select_random_rabbit(Vote)).
+    select_random_rabbit(Vote).
 
 select_random_rabbit(V) :-
     alive_rabbits(Rs), Rs \= [], Rs = [V|_].
