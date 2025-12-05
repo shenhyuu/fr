@@ -389,6 +389,7 @@ update_meeting_timer :-
     retractall(next_meeting(_)),
     round_counter(R),
     NM is R + 3,
+    retractall(next_meeting(_)),
     assertz(next_meeting(NM)),
     retractall(vote(_,_)),
     !.
