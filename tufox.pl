@@ -88,7 +88,7 @@ reset_world :-
     assertz(cooldown(player,kill,0)),
     assertz(cooldown(detective,inspect,0)),
     assertz(next_meeting(3)),
-    assertz(round_counter(1)).
+    assertz(round_counter(0)).
 
 look :-
     location(player,Room),
@@ -191,7 +191,6 @@ vote(_) :-
     player_turn.
 
 player_done :-
-    tick_world,
     ai_turns,
     game_loop.
 
